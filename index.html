@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080808">
+  <meta name="color-scheme" content="dark">
+  <meta name="description" content="BULLY - DELUXE альбомын сүйікті музыка платформаңыздан тыңдаңыз.">
+
+  <title>BULLY - DELUXE | Музыка</title>
+
+  <style>
+    :root {
+      --bg: #080808;
+      --surface: #111112;
+      --surface-hover: #19191b;
+      --border: rgba(255, 255, 255, 0.09);
+      --text: #f5f5f7;
+      --muted: #929296;
+      --subtle: #606065;
+      --radius: 22px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      min-height: 100%;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      min-height: 100dvh;
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont,
+        "Segoe UI", Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      width: 600px;
+      height: 600px;
+      top: -320px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: radial-gradient(
+        circle,
+        rgba(255,255,255,0.055) 0%,
+        transparent 70%
+      );
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 480px;
+      margin: auto;
+      padding: 65px 24px 45px;
+      animation: fadeUp 0.8s ease both;
+    }
+
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      color: #aaa;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2.2px;
+      text-transform: uppercase;
+      margin-bottom: 38px;
+    }
+
+    .eyebrow .dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #fff;
+      opacity: 0.7;
+    }
+
+    .hero {
+      text-align: center;
+      margin-bottom: 36px;
+    }
+
+    .hero-label {
+      color: var(--muted);
+      font-size: 12px;
+      letter-spacing: 3px;
+      font-weight: 500;
+      margin-bottom: 14px;
+    }
+
+    h1 {
+      font-size: clamp(40px, 10vw, 58px);
+      font-weight: 750;
+      letter-spacing: -2.8px;
+      line-height: 1.05;
+      margin-bottom: 12px;
+    }
+
+    .deluxe {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 7px;
+      color: #b7b7ba;
+      margin-bottom: 24px;
+    }
+
+    .hero-description {
+      max-width: 310px;
+      margin: 0 auto;
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .album-card {
+      background: linear-gradient(
+        145deg,
+        #19191b,
+        #101011 75%
+      );
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      margin-bottom: 38px;
+      box-shadow: 0 18px 50px rgba(0,0,0,0.22);
+    }
+
+    .album-art {
+      width: 88px;
+      height: 88px;
+      flex-shrink: 0;
+      border-radius: 15px;
+      background: linear-gradient(
+        135deg,
+        #353538,
+        #171719 65%,
+        #101011
+      );
+      border: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .album-art::before {
+      content: "";
+      position: absolute;
+      width: 65px;
+      height: 65px;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 50%;
+    }
+
+    .album-art::after {
+      content: "";
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 50%;
+    }
+
+    .music-icon {
+      width: 27px;
+      height: 27px;
+      color: #f1f1f1;
+      position: relative;
+      z-index: 2;
+    }
+
+    .album-info {
+      min-width: 0;
+    }
+
+    .album-type {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .album-name {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.6px;
+      margin-bottom: 6px;
+      overflow-wrap: anywhere;
+    }
+
+    .album-description {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .section-heading {
+      text-align: center;
+      margin-bottom: 22px;
+    }
+
+    .section-heading h2 {
+      font-size: 18px;
+      font-weight: 650;
+      letter-spacing: -0.4px;
+      margin-bottom: 9px;
+    }
+
+    .section-heading p {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .platforms {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .platform {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      min-height: 72px;
+      padding: 16px 19px;
+      text-decoration: none;
+      color: var(--text);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 17px;
+      transition:
+        background 0.25s ease,
+        border-color 0.25s ease,
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .platform:hover {
+      background: var(--surface-hover);
+      border-color: rgba(255,255,255,0.22);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+    }
+
+    .platform:active {
+      transform: scale(0.985);
+    }
+
+    .platform:focus-visible {
+      outline: 2px solid #fff;
+      outline-offset: 4px;
+    }
+
+    .platform-icon {
+      width: 40px;
+      height: 40px;
+      flex-shrink: 0;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 15px;
+    }
+
+    .apple-icon {
+      background: linear-gradient(135deg, #fa5a73, #d92e50);
+    }
+
+    .spotify-icon {
+      background: #1ed760;
+    }
+
+    .platform-icon svg {
+      width: 23px;
+      height: 23px;
+    }
+
+    .platform-text {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .platform-name {
+      font-size: 15px;
+      font-weight: 650;
+      margin-bottom: 5px;
+    }
+
+    .platform-caption {
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .arrow {
+      width: 18px;
+      height: 18px;
+      color: #77777c;
+      margin-left: 10px;
+      transition: transform 0.25s ease, color 0.25s ease;
+    }
+
+    .platform:hover .arrow {
+      transform: translate(3px, -3px);
+      color: #fff;
+    }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin: 35px 0 22px;
+    }
+
+    .divider::before,
+    .divider::after {
+      content: "";
+      height: 1px;
+      flex: 1;
+      background: var(--border);
+    }
+
+    .divider span {
+      width: 4px;
+      height: 4px;
+      background: #777;
+      border-radius: 50%;
+    }
+
+    footer {
+      text-align: center;
+    }
+
+    .footer-slogan {
+      color: #c5c5c8;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 1.1px;
+      margin-bottom: 13px;
+    }
+
+    .footer-note {
+      color: var(--subtle);
+      font-size: 10px;
+      letter-spacing: 0.4px;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 380px) {
+      .container {
+        padding: 42px 18px 30px;
+      }
+
+      h1 {
+        font-size: 42px;
+      }
+
+      .album-card {
+        padding: 16px;
+        gap: 14px;
+      }
+
+      .album-art {
+        width: 76px;
+        height: 76px;
+      }
+
+      .album-name {
+        font-size: 17px;
+      }
+
+      .platform {
+        padding: 14px;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .container {
+        padding-top: 85px;
+        padding-bottom: 65px;
+      }
+
+      .album-card {
+        padding: 26px;
+      }
+
+      .platform {
+        min-height: 78px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="container">
+
+    <div class="eyebrow">
+      <span class="dot"></span>
+      <span>Бір альбом · Өзің таңда</span>
+      <span class="dot"></span>
+    </div>
+
+    <header class="hero">
+      <p class="hero-label">МУЗЫКА ӘЛЕМІ</p>
+
+      <h1 id="heroTitle">BULLY</h1>
+
+      <p class="deluxe" id="heroEdition">DELUXE</p>
+
+      <p class="hero-description">
+        Сүйікті әуендерің бір жерде.
+        Өзіңе ыңғайлы платформаны таңдап,
+        музыка әлеміне еніп кет.
+      </p>
+    </header>
+
+    <section class="album-card" aria-label="Альбом туралы ақпарат">
+
+      <div class="album-art" aria-hidden="true">
+        <svg
+          class="music-icon"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.6"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M9 18V5l12-2v13"/>
+          <ellipse cx="6" cy="18" rx="3" ry="2"/>
+          <ellipse cx="18" cy="16" rx="3" ry="2"/>
+        </svg>
+      </div>
+
+      <div class="album-info">
+        <p class="album-type">АЛЬБОМ</p>
+        <h2 class="album-name" id="albumName">
+          BULLY - DELUXE
+        </h2>
+        <p class="album-description">
+          Бір альбом. Екі платформа.
+          Таңдау өз қолыңда.
+        </p>
+      </div>
+
+    </section>
+
+    <section aria-labelledby="platformHeading">
+
+      <div class="section-heading">
+        <h2 id="platformHeading">
+          Қайдан тыңдайсың?
+        </h2>
+        <p>
+          Өзіңе ұнайтын музыкалық платформаны таңда.
+        </p>
+      </div>
+
+      <nav class="platforms" aria-label="Музыкалық платформалар">
+
+        <a
+          id="appleMusicLink"
+          class="platform"
+          href="https://music.apple.com/kz/album/bully-deluxe/6782267796"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Альбомды Apple Music платформасында ашу"
+        >
+
+          <span class="platform-icon apple-icon" aria-hidden="true">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="white"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M9 18V5l12-2v13"/>
+              <ellipse cx="6" cy="18" rx="3" ry="2"/>
+              <ellipse cx="18" cy="16" rx="3" ry="2"/>
+            </svg>
+          </span>
+
+          <span class="platform-text">
+            <span class="platform-name" style="display:block;">
+              Apple Music
+            </span>
+            <span class="platform-caption" style="display:block;">
+              Альбомды ашу
+            </span>
+          </span>
+
+          <svg
+            class="arrow"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M7 17 17 7M7 7h10v10"/>
+          </svg>
+
+        </a>
+
+        <a
+          id="spotifyLink"
+          class="platform"
+          href="https://open.spotify.com/album/3hwveWhYFxGDLy6K6xlwFh?si=8gYb3aeBQHqQeX3SgSnSag&amp;utm_source=copy-link"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Альбомды Spotify платформасында ашу"
+        >
+
+          <span class="platform-icon spotify-icon" aria-hidden="true">
+            <svg
+              viewBox="0 0 24 24"
+              fill="#080808"
+            >
+              <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm4.59 14.42a.63.63 0 0 1-.87.21c-2.39-1.46-5.4-1.79-8.94-.98a.63.63 0 0 1-.28-1.23c3.87-.88 7.2-.5 9.88 1.13.3.18.39.57.21.87Zm1.23-2.74a.79.79 0 0 1-1.08.26c-2.74-1.68-6.92-2.17-10.16-1.19a.79.79 0 1 1-.46-1.51c3.7-1.12 8.3-.57 11.44 1.36.37.23.49.71.26 1.08Zm.11-2.85c-3.29-1.95-8.72-2.13-11.86-1.18a.95.95 0 1 1-.55-1.82c3.61-1.1 9.6-.89 13.38 1.35a.95.95 0 0 1-.97 1.65Z"/>
+            </svg>
+          </span>
+
+          <span class="platform-text">
+            <span class="platform-name" style="display:block;">
+              Spotify
+            </span>
+            <span class="platform-caption" style="display:block;">
+              Альбомды ашу
+            </span>
+          </span>
+
+          <svg
+            class="arrow"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M7 17 17 7M7 7h10v10"/>
+          </svg>
+
+        </a>
+
+      </nav>
+    </section>
+
+    <div class="divider" aria-hidden="true">
+      <span></span>
+    </div>
+
+    <footer>
+      <p class="footer-slogan">
+        Жақындат · Таңда · Тыңда
+      </p>
+      <p class="footer-note">
+        Музыка әрқашан жаныңда.
+      </p>
+    </footer>
+
+  </main>
+
+  <script>
+    "use strict";
+
+    /*
+      Музыка туралы негізгі деректер.
+      Альбом атауын немесе сілтемелерді
+      өзгерту үшін осы бөлімді өңдеңіз.
+    */
+
+    const musicConfig = {
+      title: "BULLY",
+      edition: "DELUXE",
+      albumName: "BULLY - DELUXE",
+
+      platforms: {
+        appleMusic:
+          "https://music.apple.com/kz/album/bully-deluxe/6782267796",
+
+        spotify:
+          "https://open.spotify.com/album/3hwveWhYFxGDLy6K6xlwFh?si=8gYb3aeBQHqQeX3SgSnSag&utm_source=copy-link"
+      }
+    };
+
+    function initializeMusicPage() {
+      const heroTitle = document.getElementById("heroTitle");
+      const heroEdition = document.getElementById("heroEdition");
+      const albumName = document.getElementById("albumName");
+
+      const appleMusicLink =
+        document.getElementById("appleMusicLink");
+
+      const spotifyLink =
+        document.getElementById("spotifyLink");
+
+      heroTitle.textContent = musicConfig.title;
+      heroEdition.textContent = musicConfig.edition;
+      albumName.textContent = musicConfig.albumName;
+
+      document.title = musicConfig.albumName + " | Музыка";
+
+      appleMusicLink.href =
+        musicConfig.platforms.appleMusic;
+
+      spotifyLink.href =
+        musicConfig.platforms.spotify;
+    }
+
+    if (document.readyState === "loading") {
+      document.addEventListener(
+        "DOMContentLoaded",
+        initializeMusicPage
+      );
+    } else {
+      initializeMusicPage();
+    }
+  </script>
+</body>
+</html>
